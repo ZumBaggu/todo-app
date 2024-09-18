@@ -1,0 +1,29 @@
+<!-- views/partials/todo.ejs -->
+<li class="card bg-base-100 shadow-md">
+  <div class="card-body flex items-center">
+    <form
+      hx-post="/edit/<%= todo.id %>"
+      hx-target="closest li"
+      hx-swap="outerHTML"
+      class="flex-grow"
+    >
+      <div class="flex items-center space-x-2">
+        <input
+          type="text"
+          name="content"
+          value="<%= todo.content %>"
+          class="input input-bordered w-full"
+        />
+        <button type="submit" class="btn btn-secondary btn-sm">Speichern</button>
+      </div>
+    </form>
+    <button
+      hx-post="/delete/<%= todo.id %>"
+      hx-target="closest li"
+      hx-swap="outerHTML"
+      class="btn btn-error btn-sm ml-4"
+    >
+      Löschen
+    </button>
+  </div>
+</li>

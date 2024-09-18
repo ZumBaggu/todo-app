@@ -1,0 +1,56 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Todo App</title>
+    <!-- htmx einbinden -->
+    <script
+      src="https://unpkg.com/htmx.org@2.0.2"
+      integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ"
+      crossorigin="anonymous"
+    ></script>
+    <!-- CSS-Bibliotheken -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-base-200 min-h-screen">
+    <div class="container mx-auto p-6">
+      <div class="max-w-xl mx-auto">
+        <h1 class="text-4xl font-bold mb-8 text-center">📝 Meine Todos</h1>
+
+        <!-- Formular zum Hinzufügen von Todos -->
+        <div class="card bg-base-100 shadow-xl mb-8">
+          <div class="card-body">
+            <form
+              hx-post="/add"
+              hx-target="#todo-list"
+              hx-swap="beforeend"
+              class="flex space-x-2"
+            >
+              <input
+                type="text"
+                name="content"
+                class="input input-bordered w-full"
+                placeholder="Neues Todo hinzufügen"
+                required
+              />
+              <button type="submit" class="btn btn-primary">Hinzufügen</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Todo-Liste -->
+        <ul id="todo-list" class="space-y-4">
+          <% todos.forEach(function (todo) { %>
+            <%- include('partials/todo', { todo: todo }) %>
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
